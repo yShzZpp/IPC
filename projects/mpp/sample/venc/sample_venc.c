@@ -17,6 +17,7 @@ extern "C"{
 #include <pthread.h>
 #include <signal.h>
 
+/** #include "sample_comm.h" */
 #include "../common/sample_comm.h"
 
 VIDEO_NORM_E gs_enNorm = VIDEO_ENCODING_MODE_NTSC;
