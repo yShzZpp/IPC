@@ -36,9 +36,21 @@
 		YUV420：
 			四个像素共用一对UV分量，单个像素占空间为：1byte(Y) + 1/4byte(U) + 1/4byte(V) = 1.5byte
 
+		以YUV444举例
 		packed:
-			{{Y1U2V3},{Y2U2V2}.{Y3U3V3},{Y4U4V4}}
+			{{Y1U1V1},{Y2U2V2}.{Y3U3V3},{Y4U4V4}}
 		planer:
 			{{Y1Y2Y3Y4},{U1U2U3U4},{V1V2V3V4}}
+		semiplaner:
+			{{Y1Y2Y3Y4},{U1V1U2V2U3V3U4V4}}
+
+		以YUV422举例
+		packed:
+			{{Y1U1V1},{Y2U1V1}.{Y3U2V2},{Y4U2V2}}
+		planer:
+			{{Y1Y2Y3Y4},{U1U2},{V1V2}}
+		semiplaner:
+			{{Y1Y2Y3Y4},{U1V1U2V2}}
+
 
 .2
