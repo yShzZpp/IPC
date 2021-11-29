@@ -1,15 +1,23 @@
 1.命名相关
 
 	类型定义：
-		void         = XX_VOID
-		int          = XX_S32
-		unsigned int = XX_U32
-		enum         = XXX_E
-		struct       = XXX_S
+		void           = XX_VOID
+		int            = XX_S32
+		unsigned int   = XX_U32
+		enum           = XXX_E
+		struct         = XXX_S
+		struct array   =
 
 	变量名定义
-		int          = s32XXX
-		unsigned int = u32XX
-		enum         = enXXX
-		struct       = stXXX
+		int            = s32XXX
+		unsigned int   = u32XX
+		enum           = enXXX
+		struct         = stXXX
+		array          = aXXX
+		pointer        = p
+		struct pointer = pstXXX
+		struct array   = astXXX
+	
+	函数命名
+		计算相关 ：xxx_CalcXxxXxx()
 .1

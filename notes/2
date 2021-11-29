@@ -62,6 +62,83 @@
 		./sample_venc 0 (0代表一路 1080P H264 加 一路VGA H264)
 
 	进入主要的函数
+	HI_S32 SAMPLE_VENC_1080P_CLASSIC(HI_VOID
+
+-----step1: init sys variable-----------------------------------------------------
+		变量初始化
+
+		清空视频缓存池 stVbConf 的结构体，其类型名为hiVB_CONF_S
+
+		进入函数1a
+		{
+			HI_S32 SAMPLE_COMM_VI_GetSizeBySensor(PIC_SIZE_E *penSize);
+			目的：通过sensor的类型，返回支持的视频大小
+		}
+
+		进入函数1b
+		{	
+			HI_U32 SAMPLE_COMM_SYS_CalcPicVbBlkSize(VIDEO_NORM_E enNorm, PIC_SIZE_E enPicSize, PIXEL_FORMAT_E enPixFmt, HI_U32 u32AlignWidth);
+			目的：计算出缓冲池大小
+
+			创建stSize结构体 存放宽高大小
+
+			进入函数1b1
+			{
+				HI_S32 SAMPLE_COMM_SYS_GetPicSize(VIDEO_NORM_E enNorm, PIC_SIZE_E enPicSize, SIZE_S *pstSize);
+				目的根据enPicSize枚举变量，将指针pstSize的结构体成员 宽和高 赋值
+			}	
+
+			将视频的宽和高计算出视频缓冲池的大小u32VbSize返回
+		}
+		
+		将得到的u32VbSize返回值 赋值到 缓冲池结构体变量stVbConf的u32BlkSize成员变量中，
+		根据芯片的类型赋值 缓冲池结构体变量stVbConf的u32BlkCnt成员变量
+		完成对视频缓冲池的大小以及数量的初始化
+
+-------step2: mmp system init---------------------------------------------------
+		媒体处理软件平台(Media Process Platform)初始化
+		
+		进入函数2a
+		{	
+			HI_S32 SAMPLE_COMM_SYS_Init(VB_CONF_S *pstVbConf);
+			目的：传递上一步初始化完成的视频缓冲池变量stVbConf
+			对mpp进行初始化，分配内存
+			创建stSysConf结构体
+
+			调用ko装载的函数
+				HI_MPI_SYS_Exit();
+				HI_MPI_VB_Exit();
+				先 退出mpp系统 以及 释放视频缓冲池
+
+			先设置VB，开启VB
+				HI_MPI_VB_SetConf(pstVbConf);
+				HI_MPI_VB_Init()	
+				
+
+
+
+		}
+-------step 3: start vi dev & chn to capture-----------------------------------------
+		开启vi设备以及通道 去获取信息
+
+		进入函数3a
+			HI_S32 SAMPLE_COMM_VI_StartVi(SAMPLE_VI_CONFIG_S* pstViConfig);
+			
+
+
+
+		
+
+
+
+	
+
+.3
+
+
+
+
+
 
 
 
