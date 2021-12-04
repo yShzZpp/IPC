@@ -123,9 +123,84 @@
 -------step 3: start vi dev & chn to capture-----------------------------------------
 		开启vi设备以及通道 去获取信息
 
-		设置stViConfig结构体的变量 
+		设置SAMPLE_VI_CONFIG_S创建的stViConfig结构体的变量 
+		{
+			SAMPLE_VI_MODE_E  enViMode;		视频规格：分辨率、帧数
+			VIDEO_NORM_E  enNorm;			编码模式：PAL NTSC AUTO
+			ROTATE_E enRotate;				翻转	：不翻转 90 180 270	
+			SAMPLE_VI_CHN_SET_E enViChnSet;	镜像	：正常，左右镜像，上下镜像，上下左右镜像。 
+			WDR_MODE_E  enWDRMode;			WDR 
+
+		}
 		进入函数3a
+		{	
 			HI_S32 SAMPLE_COMM_VI_StartVi(SAMPLE_VI_CONFIG_S* pstViConfig);
+			创建SAMPLE_VI_MODE_E类型的enViMode枚举变量 也是pstViConfig里的enViMode变量;
+
+			然后判断视频规格是否是senser支持的规格
+				是：{
+					进入函数3a1
+						HI_S32 SAMPLE_COMM_VI_StartIspAndVi(SAMPLE_VI_CONFIG_S* pstViConfig)
+						获取视频规格enViMode
+
+						------step 1: mipi configure---------------------------------------------
+							移动工业处理器接口mipi(Mobile Idustry Processor Interface) 	
+
+							进入函数3a1a
+							HI_S32 SAMPLE_COMM_VI_StartMIPI(SAMPLE_VI_CONFIG_S* pstViConfig)
+							{
+								进入3a1a1函数
+								HI_S32 SAMPLE_COMM_VI_SetMipiAttr(SAMPLE_VI_CONFIG_S* pstViConfig)
+							}
+						-------step 2: configure sensor and ISP (include WDR mode)---------------
+							配置sersor和ISP
+
+							进入函数3a1b
+							HI_S32 SAMPLE_COMM_ISP_Init(WDR_MODE_E  enWDRMode)
+							{
+
+							}
+						--------step 3: run isp thread-------------------------------------------
+							运行isp线程
+
+							进入函数3a1b
+							HI_S32 SAMPLE_COMM_ISP_Run()
+						---------step 4 : config & start vicap dev------------------------------
+							
+							进入函数3a1c
+							HI_S32 SAMPLE_COMM_VI_StartDev(VI_DEV ViDev, SAMPLE_VI_MODE_E enViMode)
+							{
+								调用函数3a1c1
+								HI_S32 HI_MPI_VI_SetDevAttr(VI_DEV ViDev, const VI_DEV_ATTR_S *pstDevAttr);
+								调用函数3a1c2
+								HI_S32 HI_MPI_ISP_GetWDRMode(ISP_DEV IspDev, ISP_WDR_MODE_S *pstWDRMode);
+								调用函数3a1c3
+								HI_S32 HI_MPI_VI_SetWDRAttr(VI_DEV ViDev, const VI_WDR_ATTR_S *pstWDRAttr);
+								调用函数3a1c4
+								HI_S32 HI_MPI_VI_EnableDev(VI_DEV ViDev);
+
+							}
+						-----------Step 5: config & start vicap chn (max 1)-----------------------
+									配置和开启vi获取通道
+							进入函数3a1d
+							HI_S32 SAMPLE_COMM_VI_StartChn(VI_CHN ViChn, RECT_S *pstCapRect, SIZE_S *pstTarSize, SAMPLE_VI_CONFIG_S* pstViConfig)
+							{
+								调用函数3a1d1
+								HI_S32 HI_MPI_VI_SetChnAttr(VI_CHN ViChn, const VI_CHN_ATTR_S *pstAttr);
+								调用函数3a1d2
+								HI_S32 HI_MPI_VI_SetRotate(VI_CHN ViChn, const ROTATE_E enRotate);
+					
+								调用函数3a1d3
+								HI_S32 HI_MPI_VI_EnableChn(VI_CHN ViChn);
+
+							}
+				}
+				
+				否：{
+					进入函数3a2
+				}
+
+		}
 			
 
 
