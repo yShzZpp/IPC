@@ -105,16 +105,18 @@
 			对mpp进行初始化，分配内存
 			创建stSysConf结构体
 
-			调用ko装载的函数
+			调用ko装载的退出函数
 				HI_MPI_SYS_Exit();
 				HI_MPI_VB_Exit();
 				先 退出mpp系统 以及 释放视频缓冲池
 
 			先设置VB，开启VB
-				HI_MPI_VB_SetConf(pstVbConf);
-				HI_MPI_VB_Init()	
-				
+				HI_S32 HI_MPI_VB_SetConf(const VB_CONF_S *pstVbConf);
+				HI_S32 HI_MPI_VB_Init(HI_VOID)	
 
+			对stSysConf赋值，设置SYS，再初始化SYS
+				HI_S32 HI_MPI_SYS_SetConf(const MPP_SYS_CONF_S* pstSysConf);
+				HI_S32 HI_MPI_SYS_Init(HI_VOID);
 
 
 		}
