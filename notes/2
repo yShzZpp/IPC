@@ -123,6 +123,7 @@
 -------step 3: start vi dev & chn to capture-----------------------------------------
 		开启vi设备以及通道 去获取信息
 
+		设置stViConfig结构体的变量 
 		进入函数3a
 			HI_S32 SAMPLE_COMM_VI_StartVi(SAMPLE_VI_CONFIG_S* pstViConfig);
 			
