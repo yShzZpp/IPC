@@ -163,11 +163,11 @@
 						--------step 3: run isp thread-------------------------------------------
 							运行isp线程
 
-							进入函数3a1b
+							进入函数3a1c
 							HI_S32 SAMPLE_COMM_ISP_Run()
 						---------step 4 : config & start vicap dev------------------------------
 							
-							进入函数3a1c
+							进入函数3a1d
 							HI_S32 SAMPLE_COMM_VI_StartDev(VI_DEV ViDev, SAMPLE_VI_MODE_E enViMode)
 							{
 								调用函数3a1c1
@@ -182,7 +182,7 @@
 							}
 						-----------Step 5: config & start vicap chn (max 1)-----------------------
 									配置和开启vi获取通道
-							进入函数3a1d
+							进入函数3a1e
 							HI_S32 SAMPLE_COMM_VI_StartChn(VI_CHN ViChn, RECT_S *pstCapRect, SIZE_S *pstTarSize, SAMPLE_VI_CONFIG_S* pstViConfig)
 							{
 								调用函数3a1d1
